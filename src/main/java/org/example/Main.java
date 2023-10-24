@@ -1,11 +1,14 @@
 package org.example;
 
 import org.example.labs.Lab1;
+import org.example.labs.Lab2;
+import org.example.labs.Lab3;
 
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
+
         System.out.println("""
                 Программная реализация лабораторных рабор по ОТПИ:
                 1.Лаб.работа №1 "RLE-алгоритм"
@@ -19,8 +22,8 @@ public class Main {
             int option = sc.nextInt();
             switch(option){
                 case 1 -> Lab1.solve();
-                case 2 -> System.out.println("lab 2");
-                case 3 -> System.out.println("lab 3");
+                case 2 -> Lab2.solve();
+                case 3 -> Lab3.solve();
                 default -> exit = true;
             }
         }

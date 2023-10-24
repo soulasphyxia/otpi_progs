@@ -1,6 +1,7 @@
 package org.example.labs;
 
 import org.example.algorithms.RLE_PCX;
+import org.example.utils.Utils;
 
 public class Lab1 {
 
@@ -15,18 +16,14 @@ public class Lab1 {
 
         System.out.println("Сжатая строка: " + encodedString);
 
-        System.out.println("Эффективность сжатия: " + calculateEfficiency(encodedString.length(), toEncode.length()) + "%" + "\n");
+        System.out.println("Эффективность сжатия: " + Utils.calculateEfficiency(encodedString.length(), toEncode.length()) + "%" + "\n");
         System.out.println("Строка для распаковки: " + toDecode);
         String decodedString = RLE_PCX.decode(toDecode);
         System.out.println("Распакованная строка: " + decodedString);
-        System.out.println("Эффективность сжатия: " + calculateEfficiency(toDecode.length(), decodedString.length()) + "%");
-
+        System.out.println("Эффективность сжатия: " + Utils.calculateEfficiency(toDecode.length(), decodedString.length()) + "%");
 
     }
 
-    private static int calculateEfficiency(int a, int b){
 
-        return 100 - Math.round((float) a /b * 100);
-    }
 
 }

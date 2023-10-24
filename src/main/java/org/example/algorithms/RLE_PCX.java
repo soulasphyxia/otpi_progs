@@ -7,15 +7,13 @@ public class RLE_PCX {
         while(i < msg.length() - 1){
             int k = 1;
 
-            StringBuilder msgByte= new StringBuilder();
-            msgByte.append(msg.charAt(i)).append(msg.charAt(i + 1));
+            String msgByte = String.valueOf(msg.charAt(i)) + msg.charAt(i + 1);
 
             int j = i + 2;
 
             while(j < msg.length() - 1){
-                StringBuilder msgNextByte= new StringBuilder();
-                msgNextByte.append(msg.charAt(j)).append(msg.charAt(j + 1));
-                if(msgByte.compareTo(msgNextByte) == 0){
+                String msgNextByte= String.valueOf(msg.charAt(j)) + msg.charAt(j + 1);
+                if(msgByte.equals(msgNextByte)){
                     k++;
                     j += 2;
                     i += 2;
@@ -29,7 +27,7 @@ public class RLE_PCX {
                 encodedString.append(toByteCounter(k)).append(msgByte);
             }
             else{
-                if(isByteCounter(msgByte.toString())){
+                if(isByteCounter(msgByte)){
                     encodedString.append(toByteCounter(1)).append(msgByte);
                 }else{
                     encodedString.append(msgByte);
@@ -45,15 +43,12 @@ public class RLE_PCX {
         StringBuilder decodedString = new StringBuilder();
         int i = 0;
         while(i < msg.length() - 1){
-            StringBuilder msgByte= new StringBuilder();
-            msgByte.append(msg.charAt(i)).append(msg.charAt(i + 1));
-
-            if(isByteCounter(msgByte.toString())){
-                StringBuilder msgNextByte= new StringBuilder();
-                msgNextByte.append(msg.charAt(i + 2)).append(msg.charAt(i + 3));
-                int count = countInBinary(msgByte.toString());
+            String msgByte= String.valueOf(msg.charAt(i)) + msg.charAt(i + 1);
+            if(isByteCounter(msgByte)){
+                String msgNextByte = String.valueOf(msg.charAt(i + 2)) + msg.charAt(i + 3);
+                int count = countInBinary(msgByte);
                 decodedString
-                        .append(String.valueOf(msgNextByte)
+                        .append(msgNextByte
                         .repeat(Math.max(0, count)));
                 i += 4;
             } else{
