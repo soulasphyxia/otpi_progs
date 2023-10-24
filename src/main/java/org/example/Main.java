@@ -14,6 +14,7 @@ public class Main {
                 1.Лаб.работа №1 "RLE-алгоритм"
                 2.Лаб.работа №2 "Кодирование методом Шеннона-Фано"
                 3.Лаб.работа №3 "Кодирование методом Шеннона-Фано по блокам"
+                4.Выход
                 """);
         boolean exit = false;
         while(!exit){
@@ -24,7 +25,7 @@ public class Main {
                 case 1 -> Lab1.solve();
                 case 2 -> Lab2.solve();
                 case 3 -> Lab3.solve();
-                default -> exit = true;
+                case 4 -> exit = true;
             }
         }
 
