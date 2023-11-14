@@ -3,45 +3,52 @@ package org.example.algorithms;
 import org.example.utils.Letter;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class HuffmanEncoder {
 
-    private ArrayList<Letter> letters;
+    public HuffmanEncoder(){
 
-    private HashMap<Letter, String> codes;
-
-
-    public HuffmanEncoder(ArrayList<Letter> letters){
-        this.letters = letters;
-        this.codes = new HashMap<>();
     }
 
 
-    public HashMap<Letter, String> encode(){
-        //ПОПРОБОВАТЬ PRIORITY QUEUE
+    public HashMap<Letter, String> encode(ArrayList<Letter> letters){
         PriorityQueue<Letter> pq = new PriorityQueue<>();
-        TreeMap<Letter, Double> map = new TreeMap<>();
+        HashMap<Letter, String> codes = new HashMap<>();
+        HashMap<Letter,String> tempHashMap = new HashMap<>();
+        int letterLength = letters.get(0).getValue().length();
         pq.addAll(letters);
         while(pq.size() != 1){
             Letter l1 = pq.poll();
             Letter l2 = pq.poll();
-            map.put(l1,l1.getProb());
-            map.put(l2,l2.getProb());
-            pq.add(new Letter(l1.getValue()+l2.getValue(),l1.getProb()+ l2.getProb()));
+            Letter sum = new Letter(l1.getValue()+l2.getValue(),l1.getProb()+ l2.getProb());
+            if(!tempHashMap.containsKey(l1)){
+                tempHashMap.put(l1,"0");
+            }else{
+                tempHashMap.put(l1,tempHashMap.get(l1) + "0");
+            }
+            if(!tempHashMap.containsKey(l2)){
+                tempHashMap.put(l2,"1");
+            }else{
+                tempHashMap.put(l2,tempHashMap.get(l2) + "1");
+            }
+            pq.add(sum);
         }
-
-        System.out.println(map);
-
-
+        List<Letter> sortedLetters = tempHashMap.keySet().stream().sorted(Comparator.comparingInt(x -> x.getValue().length())).collect(Collectors.toList());
+        for(Letter l : sortedLetters){
+            if(l.getValue().length() == letterLength){
+                StringBuilder code = new StringBuilder();
+                for(Letter k : tempHashMap.keySet()){
+                    if(k.getValue().contains(l.getValue())){
+                        code.append(tempHashMap.get(k));
+                    }
+                }
+                codes.put(l,code.reverse().toString());
+            }
+        }
         return codes;
     }
 
 
-    public ArrayList<Letter> getLetters() {
-        return letters;
-    }
 
-    public void setLetters(ArrayList<Letter> letters) {
-        this.letters = letters;
-    }
 }
