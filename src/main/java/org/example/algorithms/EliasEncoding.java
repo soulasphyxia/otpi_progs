@@ -12,6 +12,7 @@ public class EliasEncoding {
     }
 
     public static String omegaEncoding(int n){
+        if(n == 1) return "0";
         StringBuilder answer = new StringBuilder();
         String bin = Integer.toBinaryString(n);
         answer.append(bin).append("0");

@@ -112,8 +112,6 @@ public class Lab4 {
         }
         System.out.println(String.format("nср = %.3f",kc));
         System.out.println(String.format("nср/3 = %.2f на %.1f%% больше энтропии",kc/3,(kc/3 - H)*100));
-        System.out.println();
-        System.out.println("Коды Шеннона-Фано и Хаффмана совпали");
     }
 
 
